@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}
+    Snake
+{% endblock %}
+
+
+{% block content %}
+    <div class="row" style="margin-top:20px; margin-left:20px">
+        <div class="col">
+            <body class="text-center">
+                <table class="table table-hover table-dark">
+                    <thead>
+                        <tr>
+                            <!-- Your Columns HERE -->
+                            <th scope="col">Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Your rows inside the table HERE: -->
+                        <tr>
+                            <td id="score">0</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </body>
+        </div>
+        <div class="col-6">
+            <div id="output"></div>
+            <canvas id="snakeboard" width="900" height="600"></canvas>
+
+            <script src="\static\snake.js"> </script>
+        </div>
+        <div class="col">
+            <h1>Leaderboard</h1>
+            <body class="text-center">
+                <table class="table table-hover table-dark">
+                    <thead>
+                        <tr>
+                            <th scope="col">Place</th>
+                            <th scope="col">Player</th>
+                            <th scope="col">Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for player in leaderboard %}
+                        <tr>
+                            <td>{{ player.position }}</td>
+                            <td>{{ player.name }}</td>
+                            <td>{{ player.score }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </body>
+        </div>
+    </div>
+
+{% endblock %}
