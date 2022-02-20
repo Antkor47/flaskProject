@@ -96,7 +96,15 @@ def get_post_score():
 def add_to_leaderboard(name, score, player_to_drop):
     board = []
     drop = Leaderboard.query.filter_by(score=player_to_drop).all()
-    drop = drop[-1]
+
+    if drop:
+        drop = drop[-1]
+
+    if Leaderboard.query.filter_by(name=name).all():
+        old_score = Leaderboard.query.filter_by(name=name).all()
+        for old_player in old_score:
+            db.session.delete(old_player)
+            db.session.commit()
 
     if len(Leaderboard.query.all()) > 9:
         db.session.delete(drop)
